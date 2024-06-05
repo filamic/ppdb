@@ -21,14 +21,15 @@ Aplikasi ini memudahkan sekolah dalam mengumpulkan data peserta didik baru untuk
 > [!WARNING]  
 > secara default aplikasi ini menggunakan Sqlite, silahkan lakukan configurasi sendiri di file .env untuk menggunakan database lain.
 
-## Sponsors
+## Dukungan
 
-Coming Soon.
+Jika kalian suka dengan apa yang kami kerjakan, dan ingin terus mendukung produk kami tetap berjalan, kalian bisa mendukung kami melalui:
+(Akan Datang)
 
-## Contributing
+## Berkontribusi
 
 Kami sangat mengapresiasi segala jenis kontribusi yang anda lakukan, silahkan melakukan pull request pada repository ini, team kami akan melakukan review dan jika tidak terdapat masalah pada PR yang diberikan, kami akan segera melakukan merging.
 
-## License
+## Lisensi
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
