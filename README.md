@@ -18,7 +18,7 @@ Aplikasi ini memudahkan sekolah dalam mengumpulkan data peserta didik baru untuk
 1. Jalanakan ``` bash setup.sh ``` atau ``` ./setup.sh ``` pada terminal.
 2. Selesai.
 
-> [!PERINGATAN]  
+> [!WARNING]  
 > secara default aplikasi ini menggunakan Sqlite, silahkan lakukan configurasi sendiri di file .env untuk menggunakan database lain.
 
 ## Sponsors
