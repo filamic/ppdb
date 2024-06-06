@@ -8,7 +8,7 @@
             group block w-full mt-8 sm:mt-0 rounded-lg p-6 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 
             hover:bg-sky-500 hover:ring-sky-500
             dark:bg-[#0F172A] 
-            transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300
+            transition ease-in-out delay-150 sm:hover:-translate-y-1 sm:hover:scale-110 duration-300
             "
             wire:click="mountAction('create')"
             >
@@ -24,7 +24,7 @@
     </div>
 
     @if(!$students->count())
-        <div class="flex flex-col justify-center items-center mt-8">
+        <div class="flex flex-col justify-center items-center mt-4">
             <div class="flex justify-center items-center">
                 <img src="/img/undraw_no_data.svg" alt="" class="w-40 h-40">
             </div>
@@ -33,7 +33,17 @@
         </div>
     @endif
     @if($students->count())
-    <div class="grid justify-between items-center mt-10 gap-2 grid-cols-2 sm:grid-cols-3">
+    <div class="relative mt-4">
+        <div class="absolute inset-0 flex items-center">
+            <div class="h-px w-full bg-gray-200 dark:bg-white/10"></div>
+        </div>
+        <div class="relative flex justify-center">
+            <span class="bg-white px-6 text-sm font-medium leading-6 text-gray-500 dark:bg-[#020420] dark:text-gray-400">
+                {{__('label.all_student')}}
+            </span>
+        </div>
+    </div>
+    <div class="grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-3">
         @foreach ($students as $student)    
             <div wire:key="{{$student->id}}" class="py-8 px-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 dark:bg-[#0F172A] cursor-pointer w-full">
                 <img class="block h-24 rounded-full sm:shrink-1 mx-auto" src="{{$student->sex_img}}" alt="{{$student->name}}" />
