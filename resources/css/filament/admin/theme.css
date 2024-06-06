@@ -1,0 +1,20 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+body {
+    @apply dark:!bg-[#020420];
+}
+
+/* Login Panel */
+.fi-simple-main {
+    @apply dark:!bg-transparent dark:ring-0;
+}
+.fi-simple-main .fi-logo {
+    @apply !h-12
+}
+/* Login Panel */
+
+.fi-topbar nav {
+    @apply dark:!bg-[#020420] ;
+}
