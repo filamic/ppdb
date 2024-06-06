@@ -57,6 +57,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     public function createAction(): Action
     {
         return Action::make('create')
+            ->label(__('filament-actions::create.single.label'))
             ->steps([
                 Step::make('studentClassLevelProposed')
                     ->label(__('form.student_class_level_proposed'))
