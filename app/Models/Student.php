@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use App\Observers\StudentObserver;
 use App\Models\Scopes\MyStudentScope;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 #[ScopedBy([MyStudentScope::class])]
+#[ObservedBy([StudentObserver::class])]
 class Student extends Model
 {
     use HasFactory;
@@ -18,12 +20,11 @@ class Student extends Model
     /**
      * Interact with the user's first name.
      */
-    protected function classLevelProposed(): Attribute
+    public function getClassLevelProposedNameAttribute()
     {
-        return Attribute::make(
-            get: fn (int $value) => ClassLevel::find($value)->name,
-        );
+        return ClassLevel::find($this->class_level_proposed)->name;
     }
+    
 
     /**
      * Interact with the user's sex.
@@ -32,15 +33,9 @@ class Student extends Model
     {
         return Sex::find($this->sex)->img;
     }
-    
-    /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
+
+    public function guardians(): BelongsToMany
     {
-        static::creating(function (Student $student) {
-            $student->user_id = auth()->id();
-            $student->registration_number = Str::random(32);
-        });
+        return $this->belongsToMany(Guardian::class,StudentGuardian::class);
     }
 }

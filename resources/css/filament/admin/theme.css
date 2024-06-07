@@ -16,5 +16,26 @@ body {
 /* Login Panel */
 
 .fi-topbar nav {
-    @apply dark:!bg-[#020420] ;
+    @apply dark:!bg-[#020420] sm:max-w-7xl sm:mx-auto xl:ring-0;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    @apply ease-in-out w-2 h-2
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply ease-in-out bg-[#f1f1f1] dark:bg-[#020420]
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-500 ease-in-out rounded-xl
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-300 dark:bg-[#E65C00] ease-in-out
+  }

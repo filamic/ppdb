@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('guardians', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('place_of_birth')->nullable();
             $table->date('date_of_birth')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('profession')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_numbers')->nullable();
+            $table->tinyInteger('guardian_type');
             $table->boolean('authorized_to_pickup_pupil')->default(0);
             $table->timestamps();
         });
