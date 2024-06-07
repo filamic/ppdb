@@ -32,6 +32,14 @@ return [
 
     'student_identity' => 'Identitas Anak Didik',
     'student_previous_school_identity' => 'Identitas Sekolah Sebelumnya',
-    'student_class_level_proposed' => 'Jenjang Sekolah Yang Dituju'
+    'student_class_level_proposed' => 'Jenjang Sekolah Yang Dituju',
+
+    'student_parent_identity' => 'Identitas Orang Tua',
+    'last_education' => 'Pendidikan Terakhir',
+    'profession' => 'Pekerjaan',
+    'address' => 'Alamat',
+    'guardian_type' => 'Status Keluarga',
+    'phone_numbers' => 'No Telepon/WA',
+    'authorized_to_pickup_pupil' => 'Diizinkan Untuk Menjemput Peserta Didik',
 
 ];

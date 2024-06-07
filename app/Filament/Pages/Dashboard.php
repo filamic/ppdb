@@ -2,19 +2,22 @@
  
 namespace App\Filament\Pages;
 
-use App\Filament\Forms\StudentForm;
+use App\Filament\Forms\GuardianForm;
 use App\Models\Student;
 use Filament\Actions\Action;
+use App\Filament\Forms\StudentForm;
+use App\Models\Guardian;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Pages\Page;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
+// class Dashboard extends Page implements HasForms, HasActions
 {
-
     use InteractsWithActions;
     use InteractsWithForms;
 
@@ -26,20 +29,20 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         $this->students = Student::all();
     }
-
+    
     public function createAction(): Action
     {
         return Action::make('create')
             ->label(__('filament-actions::create.single.label'))
             ->form(StudentForm::make())
             ->action(function(array $data){
-                $insertData = Student::create($data);
-                if($insertData){
+                $student = Student::create($data);
+                if($student){
                     // Sending success notification
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body('Berhasil menambahkan data peserta didik.')
+                        ->body(__('notification.success_body',['name' =>'peserta didik']))
                         ->icon('heroicon-o-check-badge')
                         ->send();
                 }
@@ -61,7 +64,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.deleted'))
-                        ->body(__('notification.deleted_body'))
+                        ->body(__('notification.deleted_body',['name' =>'peserta didik']))
                         ->icon('heroicon-o-trash')
                         ->send();
                 }
@@ -89,14 +92,31 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                 Notification::make()
                     ->success()
                     ->title(__('notification.updated'))
-                    ->body(__('notification.updated_body'))
+                    ->body(__('notification.updated_body',['name' =>'peserta didik']))
                     ->icon('heroicon-o-pencil')
                     ->send();
             })
             ;
     }
     
-    
+    public function createGuardianAction(): Action 
+    {
+        return Action::make('create')
+            ->label(__('filament-actions::create.single.label'))
+            ->form(GuardianForm::make())
+            ->action(function(array $data){
+                $guardian = Guardian::create($data);
+                if($guardian){
+                    // Sending success notification
+                    Notification::make()
+                        ->success()
+                        ->title(__('notification.success'))
+                        ->body(__('notification.success_body',['name' =>'orang tua atau wali']))
+                        ->icon('heroicon-o-check-badge')
+                        ->send();
+                }
+            });
+    }
     
 
 }

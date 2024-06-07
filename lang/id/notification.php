@@ -13,8 +13,9 @@ return [
     |
     */
     'success' => 'Berhasil',
+    'success_body' => 'Berhasil menambahkan data :name.',
     'updated' => 'Diperbaharui',
-    'updated_body' => 'Berhasil mengubah data peserta didik.',
+    'updated_body' => 'Berhasil mengubah data :name.',
     'deleted' => 'Terhapus',
-    'deleted_body' => 'Berhasil menghapus data peserta didik.',
+    'deleted_body' => 'Berhasil menghapus data :name.',
 ];
