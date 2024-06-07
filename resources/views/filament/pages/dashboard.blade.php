@@ -53,7 +53,7 @@
                             {{$student->name}} 
                         </p>
                         <p class="text-slate-500 font-medium text-xs">
-                            {{$student->class_level_proposed}}
+                            {{$student->class_level_proposed_name}}
                         </p>
                     </div>
                     <x-filament::badge size="xs"
@@ -63,12 +63,7 @@
                     </x-filament::badge>
                 </div>
                 <div class="grow flex justify-center sm:justify-end gap-4">
-                    <x-filament::icon-button
-                        icon="heroicon-m-pencil-square"
-                        tooltip="{{__('filament-actions::edit.single.label')}}"
-                        size="sm"
-                        color="gray"
-                    />
+                    {{ ($this->editAction)(['student' => $student->id]) }}
                     {{ ($this->deleteAction)(['student' => $student->id]) }}
                 </div>
             </div>

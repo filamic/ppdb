@@ -13,6 +13,8 @@ return [
     |
     */
     'success' => 'Berhasil',
-    
-
+    'updated' => 'Diperbaharui',
+    'updated_body' => 'Berhasil mengubah data peserta didik.',
+    'deleted' => 'Terhapus',
+    'deleted_body' => 'Berhasil menghapus data peserta didik.',
 ];

@@ -10,6 +10,7 @@ use App\Models\ClassLevel;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -32,6 +33,8 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
 
     public ?Collection $students;
 
+    public Student $student;
+
     public function mount(): void
     {
         $this->setAnnualStudy();
@@ -40,6 +43,8 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     public function boot(): void 
     {
         $this->students = Student::all();
+        // $this->post = Post::find($this->postId);
+        // dd('as');
     }
 
     public function setAnnualStudy() :void
@@ -58,85 +63,9 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         return Action::make('create')
             ->label(__('filament-actions::create.single.label'))
-            ->steps([
-                Step::make('studentClassLevelProposed')
-                    ->label(__('form.student_class_level_proposed'))
-                    ->icon('heroicon-m-cog')
-                    ->schema([
-                        Group::make([
-                            Select::make('annual_study')
-                                ->options($this->getAnnualStudy())
-                                ->label(__('form.annual_study'))
-                                ->required(),
-                            Select::make('class_level_proposed')
-                                ->options(ClassLevel::all()->pluck('name','id')->toArray())
-                                ->label(__('form.class_level_proposed'))
-                                ->required()
-                        ])->columns(2)
-                    ]),
-                Step::make('studentDetail')
-                    ->label(__('form.student_identity'))
-                    ->icon('heroicon-m-user')
-                    ->columns(2)
-                    ->schema([
-                        TextInput::make('name')
-                            ->label(__('form.name'))
-                            ->required(),
-                        TextInput::make('nickname')
-                            ->label(__('form.nickname'))
-                            ->required(),
-                        TextInput::make('place_of_birth')
-                            ->label(__('form.place_of_birth'))
-                            ->required(),
-                        DatePicker::make('date_of_birth')
-                            ->label(__('form.date_of_birth'))
-                            ->required(),
-                        TextInput::make('mother_tongue')
-                            ->label(__('form.mother_tongue'))
-                            ->required(),
-                        TextInput::make('status_in_the_family')
-                            ->label(__('form.status_in_the_family'))
-                            ->required(),
-                        TextInput::make('pupil_position')
-                            ->numeric()
-                            ->live()
-                            ->minValue(1)
-                            ->label(__('form.pupil_position'))
-                            ->required(),
-                        Select::make('sex')
-                            ->options(Sex::all()->pluck('name','id')->toArray())
-                            ->label(__('form.sex'))
-                            ->required(),
-                        Select::make('religion')
-                            ->options(Religion::all()->pluck('name','id')->toArray())
-                            ->label(__('form.religion'))
-                            ->required(),
-                        TextInput::make('nationality')
-                            ->label(__('form.nationality'))
-                            ->required(),
-                        TextInput::make('numbers_of_siblings')
-                            ->numeric()
-                            ->minValue(fn(Get $get)=>$get('pupil_position'))
-                            ->label(__('form.numbers_of_siblings'))
-                            ->required()
-                    ]),
-                Step::make('studentPreviousSchool')
-                    ->label(__('form.student_previous_school_identity'))
-                    ->icon('heroicon-m-building-library')
-                    ->schema([
-                        Group::make([
-                            TextInput::make('previous_school_name')
-                                ->label(__('form.previous_school_name'))
-                                ->columnSpanFull()
-                                ->required(),
-                            TextInput::make('previous_school_city_name')
-                                ->label(__('form.previous_school_city_name'))
-                                ->required(),
-                            TextInput::make('previous_school_country_name')
-                                ->label(__('form.previous_school_country_name'))
-                                ->required()
-                        ])->columns(2)
-                    ])
+            // ->steps($this->generateForm())
+            ->form([
+                Wizard::make($this->generateForm())->skippable()
             ])
             ->action(function(array $data){
                 $insertData = Student::create($data);
@@ -164,9 +93,126 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
             ->action(function(array $arguments){
                 $student = Student::find($arguments['student']);
                 $student?->delete();
+                    Notification::make()
+                            ->success()
+                            ->title(__('notification.deleted'))
+                            ->body(__('notification.deleted_body'))
+                            ->icon('heroicon-o-check-badge')
+                            ->send();
+            });
+    }
+
+    public function editAction(): Action
+    {
+        return Action::make('edit')
+            ->iconButton()
+            ->icon('heroicon-m-pencil')
+            ->size('xs')
+            ->color('gray')
+            ->tooltip(__('filament-actions::edit.single.label'))
+            // ->steps($this->generateForm())
+            ->form([
+                Wizard::make($this->generateForm())->skippable()
+            ])
+            ->fillForm(function(array $arguments){
+                $record = Student::find($arguments['student']);
+                return $record->attributesToArray();
+            })
+            ->action(function(array $arguments, array $data){
+                $student = Student::find($arguments['student']);
+                $student->update($data);
+                Notification::make()
+                        ->success()
+                        ->title(__('notification.updated'))
+                        ->body(__('notification.updated_body'))
+                        ->icon('heroicon-o-check-badge')
+                        ->send();
             });
     }
     
+    public function generateForm() : array 
+    {
+        return [
+            Step::make('studentClassLevelProposed')
+                ->label(__('form.student_class_level_proposed'))
+                ->icon('heroicon-m-cog')
+                ->schema([
+                    Group::make([
+                        Select::make('annual_study')
+                            ->options($this->getAnnualStudy())
+                            ->label(__('form.annual_study'))
+                            ->required(),
+                        Select::make('class_level_proposed')
+                            ->options(ClassLevel::all()->pluck('name','id')->toArray())
+                            ->label(__('form.class_level_proposed'))
+                            ->required()
+                    ])->columns(2)
+                ]),
+            Step::make('studentDetail')
+                ->label(__('form.student_identity'))
+                ->icon('heroicon-m-user')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('name')
+                        ->label(__('form.name'))
+                        ->required(),
+                    TextInput::make('nickname')
+                        ->label(__('form.nickname'))
+                        ->required(),
+                    TextInput::make('place_of_birth')
+                        ->label(__('form.place_of_birth'))
+                        ->required(),
+                    DatePicker::make('date_of_birth')
+                        ->label(__('form.date_of_birth'))
+                        ->required(),
+                    TextInput::make('mother_tongue')
+                        ->label(__('form.mother_tongue'))
+                        ->required(),
+                    TextInput::make('status_in_the_family')
+                        ->label(__('form.status_in_the_family'))
+                        ->required(),
+                    TextInput::make('pupil_position')
+                        ->numeric()
+                        ->live()
+                        ->minValue(1)
+                        ->label(__('form.pupil_position'))
+                        ->required(),
+                    Select::make('sex')
+                        ->options(Sex::all()->pluck('name','id')->toArray())
+                        ->label(__('form.sex'))
+                        ->required(),
+                    Select::make('religion')
+                        ->options(Religion::all()->pluck('name','id')->toArray())
+                        ->label(__('form.religion'))
+                        ->required(),
+                    TextInput::make('nationality')
+                        ->label(__('form.nationality'))
+                        ->required(),
+                    TextInput::make('numbers_of_siblings')
+                        ->numeric()
+                        ->minValue(fn(Get $get)=>$get('pupil_position'))
+                        ->label(__('form.numbers_of_siblings'))
+                        ->required()
+                ]),
+            Step::make('studentPreviousSchool')
+                ->label(__('form.student_previous_school_identity'))
+                ->icon('heroicon-m-building-library')
+                ->schema([
+                    Group::make([
+                        TextInput::make('previous_school_name')
+                            ->label(__('form.previous_school_name'))
+                            ->columnSpanFull()
+                            ->required(),
+                        TextInput::make('previous_school_city_name')
+                            ->label(__('form.previous_school_city_name'))
+                            ->required(),
+                        TextInput::make('previous_school_country_name')
+                            ->label(__('form.previous_school_country_name'))
+                            ->required()
+                    ])->columns(2)
+                ])
+        ];
+    }
     
 
 }

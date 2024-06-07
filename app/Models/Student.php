@@ -18,12 +18,24 @@ class Student extends Model
     /**
      * Interact with the user's first name.
      */
-    protected function classLevelProposed(): Attribute
+    // protected function classLevelProposed(): Attribute
+    // {
+    //     return Attribute::make(
+    //         // get: fn (int $value, array $attributes) => dd($value,$attributes),
+    //         get: fn (int $value, array $attributes) => dd($value,$attributes),
+    //     );
+    // }
+    // protected function classLevelProposedName(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (int $value, array $attributes) => $value,
+    //     );
+    // }
+    public function getClassLevelProposedNameAttribute()
     {
-        return Attribute::make(
-            get: fn (int $value) => ClassLevel::find($value)->name,
-        );
+        return ClassLevel::find($this->class_level_proposed)->name;
     }
+    
 
     /**
      * Interact with the user's sex.
