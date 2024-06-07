@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use App\Observers\StudentObserver;
 use App\Models\Scopes\MyStudentScope;
 use Illuminate\Database\Eloquent\Model;
