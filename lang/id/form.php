@@ -33,6 +33,10 @@ return [
     'student_identity' => 'Identitas Anak Didik',
     'student_previous_school_identity' => 'Identitas Sekolah Sebelumnya',
     'student_class_level_proposed' => 'Jenjang Sekolah Yang Dituju',
+    'attachment' => 'Lampiran',
+    'certificate_of_birth' => 'Akta Lahir',
+    'identity_card' => 'Kartu Tanda Penduduk',
+    'family_card' => 'Kartu Keluarga',
 
     'student_parent_identity' => 'Identitas Orang Tua',
     'last_education' => 'Pendidikan Terakhir',
