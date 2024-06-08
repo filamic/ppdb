@@ -12,6 +12,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+
+    'welcome_back'=> 'Selamat datang kembali',
+
     'student_form' => 'Formulir Peserta Didik',
     'dashboard_sub_heading' => 'Ini adalah halaman PPDB Sekolah Kristen BASIC.',
     'dashboard_empty_state_title' => 'Belum Ada Data!',
@@ -29,5 +32,7 @@ return [
 
     'guardian' => 'Orang tua/Wali',
     'student' => 'Peserta Didik',
+
+    'show_data' => 'Tampilkan Data',
 
 ];
