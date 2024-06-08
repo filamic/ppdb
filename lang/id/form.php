@@ -46,4 +46,10 @@ return [
     'phone_numbers' => 'No Telepon/WA',
     'authorized_to_pickup_pupil' => 'Diizinkan Untuk Menjemput Peserta Didik',
 
+    'school_name' => 'Nama Sekolah',
+
+    'register' => 'Daftar',
+    'school' => 'Sekolah',
+    'registered' => 'Mendaftar',
+
 ];

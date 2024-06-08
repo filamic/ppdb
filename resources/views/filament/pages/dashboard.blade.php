@@ -86,6 +86,7 @@
     
     
     <div class="flex flex-col gap-10 sm:flex-row justify-between" x-data="{ activeContent: 1 }">
+        @if($students->count())
         <ul class="fi-sidebar-group-items flex flex-col gap-y-1">
             <li class="fi-sidebar-item flex flex-col gap-y-1 cursor-pointer" @click="activeContent = 1" :class="{ 'fi-active fi-sidebar-item-active': activeContent === 1 }">
                 <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75" :class="{'hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5': activeContent === 1}">
@@ -139,7 +140,7 @@
                 </a>
             </li>
         </ul>
-
+        @endif
         @if($students->count())
             <div class="w-full grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-2 sm:mt-0"  x-show="activeContent === 1">
                 @foreach ($students as $student)

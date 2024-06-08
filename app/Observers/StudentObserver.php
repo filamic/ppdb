@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Student;
 use Illuminate\Support\Str;
+use Filament\Facades\Filament;
 
 class StudentObserver
 {
@@ -13,6 +14,7 @@ class StudentObserver
     public function creating(Student $student): void
     {
         $student->user_id = auth()->id();
+        $student->school_id = Filament::getTenant()->id;
         $student->registration_number = Str::random(32);
     }
     /**
@@ -22,6 +24,14 @@ class StudentObserver
     {
         $guardianIds = auth()->user()->guardians->pluck('id')->toArray();
         $student->guardians()->syncWithoutDetaching($guardianIds);
+    }
+
+    /**
+     * Handle the Student "updating" event.
+     */
+    public function updating(Student $student): void
+    {
+        $student->school_id = Filament::getTenant()->id;
     }
 
     /**

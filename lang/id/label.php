@@ -34,5 +34,6 @@ return [
     'student' => 'Peserta Didik',
 
     'show_data' => 'Tampilkan Data',
+    'profile' => 'Profil'
 
 ];

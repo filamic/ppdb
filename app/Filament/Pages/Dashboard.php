@@ -16,6 +16,7 @@ use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Facades\Filament;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
 // class Dashboard extends Page implements HasForms, HasActions
@@ -47,7 +48,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body(__('notification.success_body',__('label.student')))
+                        ->body(__('notification.success_body',['name'=>__('label.student')]))
                         ->icon('heroicon-o-check-badge')
                         ->send();
                 }
@@ -69,7 +70,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.deleted'))
-                        ->body(__('notification.deleted_body',__('label.student')))
+                        ->body(__('notification.deleted_body',['name'=>__('label.student')]))
                         ->icon('heroicon-o-trash')
                         ->send();
                 }
@@ -97,7 +98,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                 Notification::make()
                     ->success()
                     ->title(__('notification.updated'))
-                    ->body(__('notification.updated_body',__('label.student')))
+                    ->body(__('notification.updated_body',['name'=>__('label.student')]))
                     ->icon('heroicon-o-pencil')
                     ->send();
             })
@@ -117,7 +118,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body(__('notification.success_body',__('label.guardian')))
+                        ->body(__('notification.success_body',['name' => __('label.guardian')]))
                         ->icon('heroicon-o-check-badge')
                         ->send();
                 }
@@ -141,7 +142,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.deleted'))
-                        ->body(__('notification.deleted_body',__('label.guardian')))
+                        ->body(__('notification.deleted_body',['name' => __('label.guardian')]))
                         ->icon('heroicon-o-trash')
                         ->send();
                 }
