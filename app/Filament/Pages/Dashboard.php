@@ -16,7 +16,6 @@ use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
-use ZeeshanTariq\FilamentAttachmate\Forms\Components\AttachmentFileUpload;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
 // class Dashboard extends Page implements HasForms, HasActions
