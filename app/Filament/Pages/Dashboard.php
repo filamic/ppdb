@@ -2,18 +2,21 @@
  
 namespace App\Filament\Pages;
 
-use App\Filament\Forms\GuardianForm;
+use App\Models\User;
 use App\Models\Student;
+use App\Models\Guardian;
+use Filament\Pages\Page;
 use Filament\Actions\Action;
 use App\Filament\Forms\StudentForm;
-use App\Models\Guardian;
+use App\Filament\Forms\GuardianForm;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
+use Filament\Forms\Components\FileUpload;
 use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Pages\Page;
+use ZeeshanTariq\FilamentAttachmate\Forms\Components\AttachmentFileUpload;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
 // class Dashboard extends Page implements HasForms, HasActions
@@ -45,7 +48,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body(__('notification.success_body',['name' =>'peserta didik']))
+                        ->body(__('notification.success_body',__('label.student')))
                         ->icon('heroicon-o-check-badge')
                         ->send();
                 }
@@ -67,30 +70,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.deleted'))
-                        ->body(__('notification.deleted_body',['name' =>'peserta didik']))
-                        ->icon('heroicon-o-trash')
-                        ->send();
-                }
-            })
-            ;
-    }
-
-    public function guardianDeleteAction(): Action
-    {
-        return Action::make('guardianDelete')
-            ->requiresConfirmation()
-            ->iconButton()
-            ->icon('heroicon-m-trash')
-            ->size('sm')
-            ->color('danger')
-            ->tooltip(__('filament-actions::delete.single.label'))
-            ->action(function(array $arguments){
-                $delete = Guardian::find($arguments['guardian']);
-                if($delete?->delete()){
-                    Notification::make()
-                        ->success()
-                        ->title(__('notification.deleted'))
-                        ->body(__('notification.deleted_body',['name' =>'Orang tua/Wali']))
+                        ->body(__('notification.deleted_body',__('label.student')))
                         ->icon('heroicon-o-trash')
                         ->send();
                 }
@@ -118,12 +98,58 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                 Notification::make()
                     ->success()
                     ->title(__('notification.updated'))
-                    ->body(__('notification.updated_body',['name' =>'peserta didik']))
+                    ->body(__('notification.updated_body',__('label.student')))
                     ->icon('heroicon-o-pencil')
                     ->send();
             })
             ;
     }
+
+    
+    public function createGuardianAction(): Action 
+    {
+        return Action::make('guardianCreate')
+            ->label(__('filament-actions::create.single.label'))
+            ->form(GuardianForm::make())
+            ->action(function(array $data){
+                $guardian = Guardian::create($data);
+                if($guardian){
+                    // Sending success notification
+                    Notification::make()
+                        ->success()
+                        ->title(__('notification.success'))
+                        ->body(__('notification.success_body',__('label.guardian')))
+                        ->icon('heroicon-o-check-badge')
+                        ->send();
+                }
+            });
+    }
+    
+
+    
+    public function guardianDeleteAction(): Action
+    {
+        return Action::make('guardianDelete')
+            ->requiresConfirmation()
+            ->iconButton()
+            ->icon('heroicon-m-trash')
+            ->size('sm')
+            ->color('danger')
+            ->tooltip(__('filament-actions::delete.single.label'))
+            ->action(function(array $arguments){
+                $delete = Guardian::find($arguments['guardian']);
+                if($delete?->delete()){
+                    Notification::make()
+                        ->success()
+                        ->title(__('notification.deleted'))
+                        ->body(__('notification.deleted_body',__('label.guardian')))
+                        ->icon('heroicon-o-trash')
+                        ->send();
+                }
+            })
+            ;
+    }
+
 
     public function guardianEditAction(): Action
     {
@@ -144,26 +170,37 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                 Notification::make()
                     ->success()
                     ->title(__('notification.updated'))
-                    ->body(__('notification.updated_body',['name' =>'Orang tua/Wali']))
+                    ->body(__('notification.updated_body',['name' => __('label.guardian')]))
                     ->icon('heroicon-o-pencil')
                     ->send();
             })
             ;
     }
     
-    public function createGuardianAction(): Action 
+    public function createUserAttachmentAction(): Action 
     {
-        return Action::make('create')
+        return Action::make('userAttachmentCreate')
             ->label(__('filament-actions::create.single.label'))
-            ->form(GuardianForm::make())
+            ->form([
+                FileUpload::make('attachment')
+                    ->label(__('form.family_card'))
+                    ->image()
+                    ->maxSize(1024)
+                    ->downloadable()
+            ])
+            ->fillForm(function(){
+                $record = User::find(auth()->id());
+                return $record->attributesToArray();
+            })
             ->action(function(array $data){
-                $guardian = Guardian::create($data);
-                if($guardian){
+                $edit = User::find(auth()->id());
+                $edit->update($data);
+                if($edit){
                     // Sending success notification
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body(__('notification.success_body',['name' =>'orang tua atau wali']))
+                        ->body(__('notification.success_body',['name' =>__('form.family_card')]))
                         ->icon('heroicon-o-check-badge')
                         ->send();
                 }

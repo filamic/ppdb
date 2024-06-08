@@ -20,6 +20,10 @@ if [ ! -f .env ]; then
   php artisan migrate
   echo "Berhasil Melakukan migrasi database"
 
+  # Run storage link
+  php artisan storage:link
+  echo "Berhasil Melakukan symlink"
+
   # Create a Filament user
   echo "Silahkan membuat user admin untuk login"
   php artisan make:filament-user

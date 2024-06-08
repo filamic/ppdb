@@ -52,7 +52,7 @@
 
         <x-forms.button 
             title="{{__('label.create_student_file')}}" 
-            action="" 
+            action="createUserAttachment" 
             description="{{__('label.create_student_file_description')}}" 
         >
             <x-slot:icon>
@@ -138,32 +138,6 @@
                     </span>
                 </a>
             </li>
-
-            <li class="fi-sidebar-item flex flex-col gap-y-1 cursor-pointer" @click="activeContent = 3" :class="{ 'fi-active fi-sidebar-item-active': activeContent === 3 }">
-                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75" :class="{'hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5': activeContent === 3}">
-                    <div x-show="activeContent === 3">
-                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500" >
-                            <span class="flex h-full w-full items-center justify-center">
-                                <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-500/40">
-                                    <span class="h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
-                                </span>
-                            </span>
-                        </span>
-                    </div>
-                    <div x-show="!(activeContent === 3)">
-                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
-                            <span class="flex h-full w-full items-center justify-center">
-                                <span class="flex h-4 w-4 items-center justify-center rounded-full">
-                                    <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
-                                </span>
-                            </span>
-                        </span>
-                    </div>
-                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200" :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 3 }">
-                        Tampilkan Data File Pendukung
-                    </span>
-                </a>
-            </li>
         </ul>
 
         @if($students->count())
@@ -224,6 +198,5 @@
         @endif
     </div>
     
-
     <x-filament-actions::modals />
 </x-filament-panels::page>

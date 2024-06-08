@@ -27,4 +27,7 @@ return [
     'create_student_file' => 'Upload File Pendukung',
     'create_student_file_description' => 'Klik disini untuk mulai mengupload file pendukung.',
 
+    'guardian' => 'Orang tua/Wali',
+    'student' => 'Peserta Didik',
+
 ];
