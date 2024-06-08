@@ -1,3 +1,5 @@
+![Filamic Banner](/public/img/banner.png)
+
 ## Filamic
 
 Filamic merupakan kumpulan aplikasi open source sektor pendidikan untuk membantu meningkatkan kualitas pendidikan di indonesia.
