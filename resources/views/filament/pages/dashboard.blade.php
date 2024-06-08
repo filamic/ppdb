@@ -3,7 +3,7 @@
     <img src="/img/banner.png" alt="">
     <div class="grid sm:grid-flow-col justify-between items-center">
         <div>
-            <h3 class="font-medium text-xl dark:text-slate-50">Selamat datang kembali, <span>{{auth()->user()->name}}</span> 👋</h3>
+            <h3 class="font-medium text-xl dark:text-slate-50">{{__('label.welcome_back')}}, <span>{{auth()->user()->name}}</span> 👋</h3>
             <p class="text-slate-400">{{__('label.dashboard_sub_heading')}}</p>
         </div>
     </div>
@@ -108,7 +108,7 @@
                         </span>
                     </div>
                     <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200" :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 1 }">
-                        Tampilkan Data Peserta Didik
+                        {{__('label.show_data')}} {{__('label.student')}}
                     </span>
                 </a>
             </li>
@@ -134,7 +134,7 @@
                         </span>
                     </div>
                     <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200"  :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 2 }">
-                        Tampilkan Data Orang Tua dan Wali
+                        {{__('label.show_data')}} {{__('label.guardian')}}
                     </span>
                 </a>
             </li>
