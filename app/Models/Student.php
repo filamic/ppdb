@@ -18,7 +18,7 @@ class Student extends Model
     use HasFactory;
 
     /**
-     * Interact with the user's first name.
+     * Interact with the student's class level proposed.
      */
     public function getClassLevelProposedNameAttribute()
     {

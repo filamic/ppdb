@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StudentGuardian;
 use App\Observers\GuardianObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Guardian extends Model
 {
     use HasFactory;
+
+    /**
+     * Interact with the guardian's type.
+     */
+    public function getGuardianTypeNameAttribute()
+    {
+        return GuardianType::find($this->guardian_type)->name;
+    }
 
     public function students(): BelongsToMany
     {

@@ -24,10 +24,13 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     protected static string $view = 'filament.pages.dashboard';
 
     public ?Collection $students;
+    public ?Collection $guardians;
+    public ?Collection $activeModel;
 
     public function boot(): void 
     {
         $this->students = Student::all();
+        $this->guardians = Guardian::all();
     }
     
     public function createAction(): Action
@@ -55,7 +58,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
             ->requiresConfirmation()
             ->iconButton()
             ->icon('heroicon-m-trash')
-            ->size('xs')
+            ->size('sm')
             ->color('danger')
             ->tooltip(__('filament-actions::delete.single.label'))
             ->action(function(array $arguments){
@@ -72,12 +75,35 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
             ;
     }
 
+    public function guardianDeleteAction(): Action
+    {
+        return Action::make('guardianDelete')
+            ->requiresConfirmation()
+            ->iconButton()
+            ->icon('heroicon-m-trash')
+            ->size('sm')
+            ->color('danger')
+            ->tooltip(__('filament-actions::delete.single.label'))
+            ->action(function(array $arguments){
+                $delete = Guardian::find($arguments['guardian']);
+                if($delete?->delete()){
+                    Notification::make()
+                        ->success()
+                        ->title(__('notification.deleted'))
+                        ->body(__('notification.deleted_body',['name' =>'Orang tua/Wali']))
+                        ->icon('heroicon-o-trash')
+                        ->send();
+                }
+            })
+            ;
+    }
+
     public function editAction(): Action
     {
         return Action::make('edit')
-            ->iconButton()
             ->icon('heroicon-m-pencil')
-            ->size('xs')
+            ->iconButton()
+            ->size('sm')
             ->color('gray')
             ->tooltip(__('filament-actions::edit.single.label'))
             // ->steps($this->generateForm())
@@ -93,6 +119,32 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     ->success()
                     ->title(__('notification.updated'))
                     ->body(__('notification.updated_body',['name' =>'peserta didik']))
+                    ->icon('heroicon-o-pencil')
+                    ->send();
+            })
+            ;
+    }
+
+    public function guardianEditAction(): Action
+    {
+        return Action::make('guardianEdit')
+            ->iconButton()
+            ->icon('heroicon-m-pencil')
+            ->size('sm')
+            ->color('gray')
+            ->tooltip(__('filament-actions::edit.single.label'))
+            ->form(GuardianForm::make())
+            ->fillForm(function(array $arguments){
+                $record = Guardian::find($arguments['guardian']);
+                return $record->attributesToArray();
+            })
+            ->action(function(array $arguments, array $data){
+                $edit = Guardian::find($arguments['guardian']);
+                $edit->update($data);
+                Notification::make()
+                    ->success()
+                    ->title(__('notification.updated'))
+                    ->body(__('notification.updated_body',['name' =>'Orang tua/Wali']))
                     ->icon('heroicon-o-pencil')
                     ->send();
             })
@@ -117,6 +169,6 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                 }
             });
     }
-    
+
 
 }

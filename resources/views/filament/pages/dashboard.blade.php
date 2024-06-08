@@ -83,82 +83,147 @@
             <p class="text-gray-500 text-center">{{__('label.dashboard_empty_state_desc')}}</p>
         </div>
     @endif
-    @if($students->count())
-    <div class="flex flex-col gap-10 sm:flex-row">
+    
+    
+    <div class="flex flex-col gap-10 sm:flex-row justify-between" x-data="{ activeContent: 1 }">
         <ul class="fi-sidebar-group-items flex flex-col gap-y-1">
-            <li class="fi-sidebar-item fi-active fi-sidebar-item-active flex flex-col gap-y-1 cursor-pointer">
-                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5">
-                    <span class="fi-sidebar-item-icon h-6 w-6 text-primary-600 dark:text-primary-400">
-                        <span class="flex h-full w-full items-center justify-center">
-                            <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-500/40">
-                                <span class="h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
+            <li class="fi-sidebar-item flex flex-col gap-y-1 cursor-pointer" @click="activeContent = 1" :class="{ 'fi-active fi-sidebar-item-active': activeContent === 1 }">
+                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75" :class="{'hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5': activeContent === 1}">
+                    <div x-show="activeContent === 1">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500" >
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-500/40">
+                                    <span class="h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
+                                </span>
                             </span>
                         </span>
-                    </span>
-                    <span
-                        class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-primary-600 dark:text-primary-400">
+                    </div>
+                    <div x-show="!(activeContent === 1)">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full">
+                                    <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200" :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 1 }">
                         Tampilkan Data Peserta Didik
                     </span>
                 </a>
             </li>
-            <li class="fi-sidebar-item cursor-pointer">
-                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75">
-                    <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
-                        <span class="flex h-full w-full items-center justify-center">
-                            <span class="flex h-4 w-4 items-center justify-center rounded-full">
-                                <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+
+            <li class="fi-sidebar-item flex flex-col gap-y-1 cursor-pointer" @click="activeContent = 2" :class="{ 'fi-active fi-sidebar-item-active': activeContent === 2 }">
+                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75" :class="{'hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5': activeContent === 2}">
+                    <div x-show="activeContent === 2">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500" >
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-500/40">
+                                    <span class="h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
+                                </span>
                             </span>
                         </span>
-                    </span>
-                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200">
-                        Tampilkan Data Orang Tua
+                    </div>
+                    <div x-show="!(activeContent === 2)">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full">
+                                    <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200"  :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 2 }">
+                        Tampilkan Data Orang Tua dan Wali
                     </span>
                 </a>
             </li>
-            <li class="fi-sidebar-item cursor-pointer">
-                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75">
-                    <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
-                        <span class="flex h-full w-full items-center justify-center">
-                            <span class="flex h-4 w-4 items-center justify-center rounded-full">
-                                <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+
+            <li class="fi-sidebar-item flex flex-col gap-y-1 cursor-pointer" @click="activeContent = 3" :class="{ 'fi-active fi-sidebar-item-active': activeContent === 3 }">
+                <a class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75" :class="{'hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 bg-gray-100 dark:bg-white/5': activeContent === 3}">
+                    <div x-show="activeContent === 3">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500" >
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full bg-primary-200 dark:bg-primary-500/40">
+                                    <span class="h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
+                                </span>
                             </span>
                         </span>
-                    </span>
-                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200">
+                    </div>
+                    <div x-show="!(activeContent === 3)">
+                        <span class="fi-sidebar-item-icon h-6 w-6 text-gray-400 dark:text-gray-500">
+                            <span class="flex h-full w-full items-center justify-center">
+                                <span class="flex h-4 w-4 items-center justify-center rounded-full">
+                                    <span class="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    <span class="fi-sidebar-item-label flex-1 truncate text-sm font-medium text-gray-700 dark:text-gray-200" :class="{ 'text-primary-600 dark:text-primary-400': activeContent === 3 }">
                         Tampilkan Data File Pendukung
                     </span>
                 </a>
             </li>
         </ul>
 
-        <div class="grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-2 sm:mt-0">
-            @foreach ($students as $student)    
-                <div wire:key="{{$student->id}}" class="py-8 px-6 max-w-sm mx-auto  rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6  cursor-pointer w-full">
-                    <img class="block h-24 rounded-full sm:shrink-1 mx-auto" src="{{$student->sex_img}}" alt="{{$student->name}}" />
-                    <div class="text-center space-y-2 sm:text-left">
-                        <div class="space-y-0.5">
-                            <p class="text-md text-gray-700 font-semibold dark:text-gray-200">
-                                {{$student->name}} 
-                            </p>
-                            <p class="text-slate-500 font-medium text-xs">
-                                {{$student->class_level_proposed_name}}
-                            </p>
+        @if($students->count())
+            <div class="w-full grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-2 sm:mt-0"  x-show="activeContent === 1">
+                @foreach ($students as $student)
+                    <div wire:key="{{$student->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 w-full" >
+                        <img class="block h-24 rounded-full sm:shrink-1 mx-auto" src="{{$student->sex_img}}" alt="{{$student->name}}" />
+                        <div class="text-center space-y-2 sm:text-left">
+                            <div class="space-y-0.5">
+                                <p class="text-md text-gray-700 font-semibold dark:text-gray-200">
+                                    {{$student->name}} 
+                                </p>
+                                <p class="text-slate-500 font-medium text-xs">
+                                    {{$student->class_level_proposed_name}}
+                                </p>
+                            </div>
+                            <x-filament::badge size="xs"
+                                icon="heroicon-m-arrow-path"
+                                class="inline-flex items-center rounded-md bg-gray-50 px-2 p-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                                Proses Verifikasi
+                            </x-filament::badge>
                         </div>
-                        <x-filament::badge size="xs"
-                            icon="heroicon-m-arrow-path"
-                            class="inline-flex items-center rounded-md bg-gray-50 px-2 p-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                            Proses Verifikasi
-                        </x-filament::badge>
+                        <div class="grow flex justify-center sm:justify-end gap-4">
+                            {{ ($this->editAction)(['student' => $student->id]) }}
+                            {{ ($this->deleteAction)(['student' => $student->id]) }}
+                        </div>
                     </div>
-                    <div class="grow flex justify-center sm:justify-end gap-4">
-                        {{ ($this->editAction)(['student' => $student->id]) }}
-                        {{ ($this->deleteAction)(['student' => $student->id]) }}
+                @endforeach
+            </div>
+        @endif
+        
+        @if($guardians->count())
+            <div class="w-full grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-3 sm:mt-0" x-show="activeContent === 2">
+                @foreach ($guardians as $guardian)
+                    <div wire:key="{{$guardian->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 w-full" >
+                        <div class="text-center space-y-2 sm:text-left">
+                            <div class="space-y-0.5">
+                                <p class="text-md text-gray-700 font-semibold dark:text-gray-200">
+                                    {{$guardian->name}} 
+                                </p>
+                                <p class="text-slate-500 font-medium text-xs">
+                                    {{$guardian->phone_numbers}}
+                                </p>
+                            </div>
+                            <x-filament::badge size="xs"
+                                icon="heroicon-m-user"
+                                class="inline-flex items-center rounded-md bg-gray-50 px-2 p-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                                {{$guardian->guardian_type_name}}
+                            </x-filament::badge>
+                        </div>
+                        <div class="grow flex justify-center sm:justify-end gap-4">
+                            {{ ($this->guardianEditAction)(['guardian' => $guardian->id]) }}
+                            {{ ($this->guardianDeleteAction)(['guardian' => $guardian->id]) }}
+                        </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
+        @endif
     </div>
-    @endif
+    
 
     <x-filament-actions::modals />
 </x-filament-panels::page>

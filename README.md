@@ -12,6 +12,9 @@ Teknologi dibalik Filamic:
 
 Aplikasi ini memudahkan sekolah dalam mengumpulkan data peserta didik baru untuk keperluan pendataan pihak sekolah.
 
+## Fitur
+- (Akan Datang)
+
 ## How to Start
 
 #### #Pengguna Linux Terminal/GitBash/Laragon Terminal
@@ -21,15 +24,17 @@ Aplikasi ini memudahkan sekolah dalam mengumpulkan data peserta didik baru untuk
 > [!WARNING]  
 > secara default aplikasi ini menggunakan Sqlite, silahkan lakukan configurasi sendiri di file .env untuk menggunakan database lain.
 
+#### #Pengguna IDX Project
+(Akan Datang)
+
 ## Dukungan
 
 Jika kalian suka dengan apa yang kami kerjakan, dan ingin terus mendukung produk kami tetap berjalan, kalian bisa mendukung kami melalui:
-(Akan Datang)
+1. Memberikan bintang pada repo ini ⭐⭐⭐⭐⭐
+2. Donasi(Akan Datang)
 
 ## Berkontribusi
-
 Kami sangat mengapresiasi segala jenis kontribusi yang anda lakukan, silahkan melakukan pull request pada repository ini, team kami akan melakukan review dan jika tidak terdapat masalah pada PR yang diberikan, kami akan segera melakukan merging.
 
 ## Lisensi
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Filamic PPDB open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
