@@ -19,6 +19,9 @@ body {
     @apply dark:!bg-[#020420] sm:max-w-7xl sm:mx-auto xl:ring-0;
 }
 
+.fi-ta-ctn {
+  @apply dark:!bg-[#0F172A]
+}
 
 /* width */
 ::-webkit-scrollbar {

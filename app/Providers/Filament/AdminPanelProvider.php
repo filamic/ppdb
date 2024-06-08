@@ -56,6 +56,8 @@ class AdminPanelProvider extends PanelProvider
             ->topNavigation()
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('logo_filamic.svg'))
+            ->spa()
+            // ->unsavedChangesAlerts()
             // ->maxContentWidth(MaxWidth::FitContent);
             ;
     }
