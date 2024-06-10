@@ -14,6 +14,7 @@ class SchoolForm {
                     ->label(__('form.school_name'))
                     ->live()
                     ->required()
+                    ->unique(ignoreRecord:true)
             ])
         ];
     }

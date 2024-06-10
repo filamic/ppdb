@@ -21,10 +21,10 @@ class Student extends Model
     /**
      * Interact with the student's class level proposed.
      */
-    public function getClassLevelProposedNameAttribute()
-    {
-        return ClassLevel::find($this->class_level_proposed)->name;
-    }
+    // public function getClassLevelProposedNameAttribute()
+    // {
+    //     return ClassLevel::find($this->class_level_proposed)->name;
+    // }
     
 
     /**

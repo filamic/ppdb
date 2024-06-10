@@ -50,6 +50,9 @@ return [
 
     'register' => 'Daftar',
     'school' => 'Sekolah',
-    'registered' => 'Mendaftar',
+    'registering' => 'Mendaftar',
+    'registered' => 'Terdaftar',
+
+    'register_at_another_school' => 'Mendaftar di sekolah lain',
 
 ];

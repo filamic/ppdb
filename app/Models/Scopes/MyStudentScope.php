@@ -15,6 +15,7 @@ class MyStudentScope implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         $builder->where('user_id', auth()->id())
-            ->whereBelongsTo(Filament::getTenant());
+            ->whereBelongsTo(Filament::getTenant())
+            ;
     }
 }

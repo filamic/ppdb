@@ -4,3 +4,4 @@
 - [ ] update and delete button,to small in mobile device, maybeusing text button in mobile for better UX
 - [x] add languange switch plugin
 - [ ] onboarding page to setup, school name
+- [ ] lakukan test dengan script ini ``` $user->schools()->attach(Filament::getTenant()); ``` script iniada di userObserver

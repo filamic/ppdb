@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Filament\Panel;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -52,6 +53,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         ];
     }
 
+    
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
@@ -80,5 +82,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->schools()->whereKey($tenant)->exists();
+    }
+
+    public function scopeIsAdmin(){
+        return $this->where('is_admin',true);
     }
 }
