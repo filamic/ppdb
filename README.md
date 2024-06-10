@@ -33,10 +33,14 @@ Aplikasi ini memudahkan sekolah dalam mengumpulkan data peserta didik baru untuk
 
 Jika kalian suka dengan apa yang kami kerjakan, dan ingin terus mendukung produk kami tetap berjalan, kalian bisa mendukung kami melalui:
 1. Memberikan bintang pada repo ini ⭐⭐⭐⭐⭐
-2. Donasi(Akan Datang)
+2. Donasi(Silahkan hubungi kami via email (christmex@yahoo.com))
+3. Hire Me💸
 
 ## Berkontribusi
 Kami sangat mengapresiasi segala jenis kontribusi yang anda lakukan, silahkan melakukan pull request pada repository ini, team kami akan melakukan review dan jika tidak terdapat masalah pada PR yang diberikan, kami akan segera melakukan merging.
 
 ## Lisensi
 Filamic PPDB open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Hire Me
+- Open to any job opportunity, let's work together, send me an email (christmex@yahoo.com)✌️
