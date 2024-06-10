@@ -1,11 +1,10 @@
 <?php
  
-namespace App\Filament\Pages;
+namespace App\Filament\User\Pages;
 
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Guardian;
-use Filament\Pages\Page;
 use Filament\Actions\Action;
 use App\Filament\Forms\StudentForm;
 use App\Filament\Forms\GuardianForm;
@@ -16,15 +15,13 @@ use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Facades\Filament;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
-// class Dashboard extends Page implements HasForms, HasActions
 {
     use InteractsWithActions;
     use InteractsWithForms;
 
-    protected static string $view = 'filament.pages.dashboard';
+    protected static string $view = 'filament.user.pages.dashboard';
 
     public ?Collection $students;
     public ?Collection $guardians;
@@ -32,7 +29,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
 
     public function boot(): void 
     {
-        $this->students = Student::all();
+        $this->students = Student::with('school')->get();
         $this->guardians = Guardian::all();
     }
     

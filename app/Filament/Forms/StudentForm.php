@@ -5,7 +5,6 @@ namespace App\Filament\Forms;
 use App\Models\Sex;
 use Filament\Forms\Get;
 use App\Models\Religion;
-use App\Models\ClassLevel;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
@@ -24,16 +23,10 @@ class StudentForm {
                     ->label(__('form.student_class_level_proposed'))
                     ->icon('heroicon-m-cog')
                     ->schema([
-                        Group::make([
-                            Select::make('annual_study')
-                                ->options(self::generateAnnualStudy())
-                                ->label(__('form.annual_study'))
-                                ->required(),
-                            Select::make('class_level_proposed')
-                                ->options(ClassLevel::all()->pluck('name','id')->toArray())
-                                ->label(__('form.class_level_proposed'))
-                                ->required()
-                        ])->columns(2)
+                        Select::make('annual_study')
+                            ->options(self::generateAnnualStudy())
+                            ->label(__('form.annual_study'))
+                            ->required(),
                     ]),
                 Step::make('studentDetail')
                     ->label(__('form.student_identity'))

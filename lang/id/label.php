@@ -16,7 +16,7 @@ return [
     'welcome_back'=> 'Selamat datang kembali',
 
     'student_form' => 'Formulir Peserta Didik',
-    'dashboard_sub_heading' => 'Ini adalah halaman PPDB Sekolah Kristen BASIC.',
+    'dashboard_sub_heading' => 'Ini adalah halaman PPDB :name.',
     'dashboard_empty_state_title' => 'Belum Ada Data!',
     'dashboard_empty_state_desc' => 'Daftar Peserta Didik Yang Di Daftarkan akan Muncul Disini Jika ada.',
     'all_student' => 'Semua Peserta Didik',
@@ -34,5 +34,6 @@ return [
     'student' => 'Peserta Didik',
 
     'show_data' => 'Tampilkan Data',
+    'profile' => 'Profil'
 
 ];

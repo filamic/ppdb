@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
@@ -20,10 +21,10 @@ class Student extends Model
     /**
      * Interact with the student's class level proposed.
      */
-    public function getClassLevelProposedNameAttribute()
-    {
-        return ClassLevel::find($this->class_level_proposed)->name;
-    }
+    // public function getClassLevelProposedNameAttribute()
+    // {
+    //     return ClassLevel::find($this->class_level_proposed)->name;
+    // }
     
 
     /**
@@ -37,5 +38,9 @@ class Student extends Model
     public function guardians(): BelongsToMany
     {
         return $this->belongsToMany(Guardian::class,StudentGuardian::class);
+    }
+
+    public function school(): BelongsTo    {
+        return $this->belongsTo(School::class);
     }
 }

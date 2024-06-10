@@ -2,46 +2,48 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Pages;
 use Filament\Panel;
 use App\Models\School;
 use Filament\PanelProvider;
+use App\Http\Middleware\CheckIfUser;
 use App\Http\Middleware\ApplyTenantScopes;
 use Filament\Http\Middleware\Authenticate;
+use App\Filament\Operator\Pages\Auth\Register;
 use App\Filament\Pages\Tenancy\RegisterSchool;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use App\Filament\Pages\Tenancy\EditSchoolProfile;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use App\Filament\Operator\Pages\Tenancy\EditSchoolProfile;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
-class AdminPanelProvider extends PanelProvider
+class OperatorPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('admin')
-            ->path('/admin')
-            // ->login()
-            // ->registration()
+            ->id('operator')
+            ->path('operator')
+            ->login()
+            // ->registration(Register::class)
             ->colors([
                 'primary' => '#E65C00',
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Operator/Resources'), for: 'App\\Filament\\Operator\\Resources')
+            ->discoverPages(in: app_path('Filament/Operator/Pages'), for: 'App\\Filament\\Operator\\Pages')
             ->pages([
-                // Pages\Dashboard::class,
+                Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Operator/Widgets'), for: 'App\\Filament\\Operator\\Widgets')
             ->widgets([
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
-            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -56,15 +58,17 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->tenantMiddleware([
+                CheckIfUser::class,
+                // ApplyTenantScopes::class,
+            ], isPersistent: true)
             ->topNavigation()
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('logo_filamic.svg'))
             ->spa()
-            ->tenant(School::class, slugAttribute: 'slug', ownershipRelationship: 'schools')
+            ->tenant(School::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterSchool::class)
             ->tenantProfile(EditSchoolProfile::class)
-            // ->unsavedChangesAlerts()
-            // ->maxContentWidth(MaxWidth::FitContent);
             ;
     }
 }

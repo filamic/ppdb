@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\UserRegistration;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,5 @@ Route::get('/debug', function () {
         // ]));
     // return view('welcome');
 });
+
+// Route::get('/user-registration', UserRegistration::class);

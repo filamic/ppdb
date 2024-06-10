@@ -2,6 +2,7 @@
 
 namespace App\Models\Scopes;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
@@ -13,6 +14,8 @@ class MyStudentScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('user_id', auth()->id());
+        $builder->where('user_id', auth()->id())
+            ->whereBelongsTo(Filament::getTenant())
+            ;
     }
 }

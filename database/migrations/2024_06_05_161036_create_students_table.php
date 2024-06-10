@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('annual_study');
             $table->string('registration_number');
-            $table->tinyInteger('class_level_proposed');
             $table->string('name');
             $table->string('nickname')->nullable();
             $table->string('place_of_birth')->nullable();

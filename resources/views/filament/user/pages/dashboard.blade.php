@@ -4,7 +4,7 @@
     <div class="grid sm:grid-flow-col justify-between items-center">
         <div>
             <h3 class="font-medium text-xl dark:text-slate-50">{{__('label.welcome_back')}}, <span>{{auth()->user()->name}}</span> 👋</h3>
-            <p class="text-slate-400">{{__('label.dashboard_sub_heading')}}</p>
+            <p class="text-slate-400">{{__('label.dashboard_sub_heading',['name'=> \Filament\Facades\Filament::getTenant()->name])}}</p>
         </div>
     </div>
     <div class="grid sm:grid-flow-col gap-4 sm:gap-4">
@@ -152,7 +152,7 @@
                                     {{$student->name}} 
                                 </p>
                                 <p class="text-slate-500 font-medium text-xs">
-                                    {{$student->class_level_proposed_name}}
+                                    {{$student->school->name}}
                                 </p>
                             </div>
                             <x-filament::badge size="xs"
