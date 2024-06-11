@@ -58,6 +58,10 @@ return [
 
     'statement' => 'Pernyataan',
 
-    'student_statement' => 'Saya menyetujui syarat dan kondisi di atas.'
+    'student_statement' => 'Saya menyetujui syarat dan kondisi di atas.',
+    'student_confidential_health_information' => 'Kesehatan Anak Didik',
+    'medical_history_name' => 'Nama Catatan Kesehatan',
+    'medical_history_description' => 'Penyebab/Tindak Lanjut/hasil',
+    'medical_history_helper_text' => 'Isi jika peserta didik memiliki catatan kesehatan.',
 
 ];

@@ -19,6 +19,19 @@ class Student extends Model
     use HasFactory;
 
     /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'confidential_health_information' => 'array',
+        ];
+    }
+
+
+    /**
      * Interact with the student's class level proposed.
      */
     // public function getClassLevelProposedNameAttribute()
