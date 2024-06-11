@@ -28,6 +28,8 @@ class UserPanelProvider extends PanelProvider
             ->id('user')
             ->path('/')
             ->login()
+            ->emailVerification()
+            ->passwordReset()
             ->registration()
             ->colors([
                 'primary' => '#E65C00',

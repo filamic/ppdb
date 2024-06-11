@@ -4,6 +4,7 @@ namespace App\Filament\Forms;
 
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 
 class SchoolForm {
     public static function make() : array 
@@ -14,7 +15,8 @@ class SchoolForm {
                     ->label(__('form.school_name'))
                     ->live()
                     ->required()
-                    ->unique(ignoreRecord:true)
+                    ->unique(ignoreRecord:true),
+                RichEditor::make('statement')
             ])
         ];
     }

@@ -3,14 +3,19 @@
 namespace App\Filament\Forms;
 
 use App\Models\Sex;
+use App\Models\School;
 use Filament\Forms\Get;
 use App\Models\Religion;
+use Filament\Facades\Filament;
+use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Wizard\Step;
 
 class StudentForm {
@@ -49,6 +54,7 @@ class StudentForm {
                             ->label(__('form.mother_tongue'))
                             ->required(),
                         TextInput::make('status_in_the_family')
+                            ->placeholder(__('form.ex_status_in_the_family'))
                             ->label(__('form.status_in_the_family'))
                             ->required(),
                         TextInput::make('pupil_position')
@@ -99,7 +105,21 @@ class StudentForm {
                             ->label(__('form.certificate_of_birth'))
                             ->image()
                             ->maxSize(1024)
-                            ->downloadable()
+                            ->downloadable(),
+                        Placeholder::make('school_statement')
+                            ->label(__('form.statement'))
+                            ->hidden(function(): bool {
+                                $record = Filament::getTenant();
+                                return empty($record->statement);
+                            })
+                            ->content(new HtmlString(Filament::getTenant()->statement)),
+                        Checkbox::make('statement')
+                            ->label(__('form.student_statement'))
+                            ->hidden(function(): bool {
+                                $record = Filament::getTenant();
+                                return empty($record->statement);
+                            })
+                            ->accepted()
                     ])
                 
             ])->skippable()

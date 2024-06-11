@@ -54,5 +54,10 @@ return [
     'registered' => 'Terdaftar',
 
     'register_at_another_school' => 'Mendaftar di sekolah lain',
+    'ex_status_in_the_family' => 'Contoh: Anak Kandung',
+
+    'statement' => 'Pernyataan',
+
+    'student_statement' => 'Saya menyetujui syarat dan kondisi di atas.'
 
 ];
