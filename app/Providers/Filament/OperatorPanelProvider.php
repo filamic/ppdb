@@ -30,7 +30,7 @@ class OperatorPanelProvider extends PanelProvider
             ->id('operator')
             ->path('operator')
             ->login()
-            // ->registration(Register::class)
+            ->registration(Register::class)
             ->colors([
                 'primary' => '#E65C00',
             ])

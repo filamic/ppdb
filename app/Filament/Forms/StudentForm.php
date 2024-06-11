@@ -12,6 +12,9 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -96,6 +99,19 @@ class StudentForm {
                                 ->label(__('form.previous_school_country_name'))
                                 ->required()
                         ])->columns(2)
+                    ]),
+                Step::make('studentConfidentialHealthInformation')
+                    ->label(__('form.student_confidential_health_information'))
+                    ->icon('heroicon-m-arrow-up-tray')
+                    ->schema([
+                        Repeater::make('confidential_health_information')
+                            ->label(__('form.student_confidential_health_information'))
+                            ->helperText(__('form.medical_history_helper_text'))
+                            ->schema([
+                                TextInput::make('name')->label(__('form.medical_history_name'))->required(),
+                                Textarea::make('description')->label(__('form.medical_history_description'))->required(),
+                            ])
+                            ->defaultItems(0)
                     ]),
                 Step::make('attachment')
                     ->label(__('form.attachment'))
