@@ -8,3 +8,4 @@
 - [ ] lakukan test dengan script ini ``` $user->schools()->attach(Filament::getTenant()); ``` script iniada di userObserver
 - [ ] prevent user from register in more than one school in the same school year
 - [x] add tour plugin from filament
+- [ ] create test
