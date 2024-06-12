@@ -12,6 +12,16 @@ use Filament\Pages\Tenancy\RegisterTenant;
  
 class RegisterSchool extends RegisterTenant
 {
+    
+    public static function canView(): bool
+    {
+        if (auth()->user()->is_admin) {
+            return parent::canView();
+        }
+        return false;
+
+    }
+    
     public static function getLabel(): string
     {
         return __('filament-actions::create.single.label').' '.__('form.school');
