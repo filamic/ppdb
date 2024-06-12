@@ -12,10 +12,14 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'close' => 'Tutup',
+
     'success' => 'Berhasil',
     'success_body' => 'Berhasil menambahkan data :name.',
     'updated' => 'Diperbaharui',
     'updated_body' => 'Berhasil mengubah data :name.',
     'deleted' => 'Terhapus',
     'deleted_body' => 'Berhasil menghapus data :name.',
+    
+    'waiting_verification' => ' Menunggu proses verifikasi, dapat dilihat di halaman ini.',
 ];

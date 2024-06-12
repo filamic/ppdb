@@ -81,8 +81,14 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                     Notification::make()
                         ->success()
                         ->title(__('notification.success'))
-                        ->body(__('notification.success_body',['name'=>__('label.student')]))
+                        ->body(__('notification.success_body',['name'=>__('label.student')]).__('notification.waiting_verification'))
                         ->icon('heroicon-o-check-badge')
+                        ->persistent()
+                        ->actions([
+                            Action::make(__('notification.close'))
+                                ->color('gray')
+                                ->close(),
+                        ])
                         ->send();
                 }
             });

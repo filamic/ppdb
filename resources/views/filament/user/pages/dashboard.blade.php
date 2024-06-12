@@ -1,6 +1,8 @@
 <x-filament-panels::page>
 
+    @if(!$students->count())
     <img src="/img/banner.png" alt="">
+    @endif
     <div class="grid sm:grid-flow-col justify-between items-center">
         <div>
             <h3 class="font-medium text-xl dark:text-slate-50">{{__('label.welcome_back')}}, <span>{{auth()->user()->name}}</span> 👋</h3>
