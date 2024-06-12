@@ -9,7 +9,22 @@
             <p class="text-slate-400">{{__('label.dashboard_sub_heading',['name'=> \Filament\Facades\Filament::getTenant()->name])}}</p>
         </div>
     </div>
-    <div class="grid sm:grid-flow-col gap-4 sm:gap-4">
+    <div class="border shadow rounded-md p-4 w-full mx-auto" wire:loading>
+        <div class="animate-pulse flex space-x-4">
+            <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+            <div class="flex-1 space-y-6 py-1">
+            <div class="h-2 bg-slate-700 rounded"></div>
+            <div class="space-y-3">
+                <div class="grid grid-cols-3 gap-4">
+                <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+                </div>
+                <div class="h-2 bg-slate-700 rounded"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid sm:grid-flow-col gap-4 sm:gap-4" wire:loading.remove>
         <!-- <button type="button" class="
             group block w-full sm:mt-0 rounded-lg p-6 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 
             hover:bg-sky-500 hover:ring-sky-500
@@ -27,7 +42,7 @@
             </div>
             <p class="text-slate-500 group-hover:text-white text-sm">deskripti</p>
         </button> -->
-
+        <!-- Placeholder for loading -->
         <x-forms.button 
             id="create_student"
             title="{{__('label.create_student')}}" 

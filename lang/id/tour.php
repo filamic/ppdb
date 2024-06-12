@@ -30,4 +30,6 @@ return [
     'choose_school' => 'Pilih Sekolah',
     'choose_school_desc' => 'Anda dapat mendaftarkan anak anda yang lain di sekolah lainnya.',
 
+    'how_to_use' => 'Klik untuk menampilkan Tutorial',
+
 ];
