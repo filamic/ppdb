@@ -27,6 +27,7 @@
         </button> -->
 
         <x-forms.button 
+            id="create_student"
             title="{{__('label.create_student')}}" 
             action="create" 
             description="{{__('label.create_student_description')}}" 
@@ -39,6 +40,7 @@
         </x-forms.button>
         
         <x-forms.button 
+            id="create_parent"
             title="{{__('label.create_parent')}}" 
             action="createGuardian"
             description="{{__('label.create_parent_description')}}" 
@@ -51,6 +53,7 @@
         </x-forms.button>
 
         <x-forms.button 
+            id="create_student_file"
             title="{{__('label.create_student_file')}}" 
             action="createUserAttachment" 
             description="{{__('label.create_student_file_description')}}" 
@@ -75,7 +78,7 @@
     </div>
 
     @if(!$students->count())
-        <div class="flex flex-col justify-center items-center mt-4">
+        <div class="flex flex-col justify-center items-center mt-4" id="last_step">
             <div class="flex justify-center items-center">
                 <img src="/img/undraw_no_data.svg" alt="" class="w-40 h-40">
             </div>
