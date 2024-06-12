@@ -39,7 +39,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
 
     public function tours(): array {
         $setup = [];
-        if(!auth()->guest()){
+        if((!auth()->guest()) && auth()->user()->schools->count()){
             $setup = [
                Tour::make('dashboard')
                    ->steps(
