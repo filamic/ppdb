@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\Guardian;
 use Filament\Actions\Action;
+use Filament\Actions\StaticAction as ModalAction;
 use App\Filament\Forms\StudentForm;
 use App\Filament\Forms\GuardianForm;
 use JibayMcs\FilamentTour\Tour\Step;
@@ -85,7 +86,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
                         ->icon('heroicon-o-check-badge')
                         ->persistent()
                         ->actions([
-                            Action::make(__('notification.close'))
+                            ModalAction::make(__('notification.close'))
                                 ->color('gray')
                                 ->close(),
                         ])

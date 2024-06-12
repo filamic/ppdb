@@ -120,6 +120,7 @@ class StudentForm {
                         FileUpload::make('attachment')
                             ->label(__('form.certificate_of_birth'))
                             ->image()
+                            ->required()
                             ->maxSize(1024)
                             ->downloadable(),
                         Placeholder::make('school_statement')

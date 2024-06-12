@@ -68,6 +68,7 @@ class GuardianForm {
                         FileUpload::make('attachment')
                             ->label(__('form.identity_card'))
                             ->image()
+                            ->required()
                             ->maxSize(1024)
                             ->columnSpanFull()
                             ->downloadable()
