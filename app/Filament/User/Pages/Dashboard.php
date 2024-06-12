@@ -8,7 +8,10 @@ use App\Models\Guardian;
 use Filament\Actions\Action;
 use App\Filament\Forms\StudentForm;
 use App\Filament\Forms\GuardianForm;
+use JibayMcs\FilamentTour\Tour\Step;
+use JibayMcs\FilamentTour\Tour\Tour;
 use Filament\Forms\Contracts\HasForms;
+use JibayMcs\FilamentTour\Tour\HasTour;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\FileUpload;
 use Filament\Actions\Contracts\HasActions;
@@ -20,6 +23,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
 {
     use InteractsWithActions;
     use InteractsWithForms;
+    use HasTour;
 
     protected static string $view = 'filament.user.pages.dashboard';
 
@@ -31,6 +35,38 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         $this->students = Student::with('school')->get();
         $this->guardians = Guardian::all();
+    }
+
+    public function tours(): array {
+        $setup = [];
+        if(!auth()->guest()){
+            $setup = [
+               Tour::make('dashboard')
+                   ->steps(
+                    Step::make()
+                                // ->icon('heroicon-o-user-circle')
+                                // ->iconColor('primary')
+                                ->title(__('tour.welcome'))
+                                ->description(__('tour.welcome_desc')),
+                    Step::make('#create_student')
+                                ->title(__('tour.first_step'))
+                                ->description(__('tour.first_step_desc')),
+                    Step::make('#create_parent')
+                                ->title(__('tour.second_step'))
+                                ->description(__('tour.second_step_desc')),
+                    Step::make('#create_student_file')
+                                ->title(__('tour.third_step'))
+                                ->description(__('tour.third_step_desc')),
+                            Step::make('#last_step')
+                                ->title(__('tour.last_step'))
+                                ->description(__('tour.last_step_desc')),
+                            Step::make('.fi-tenant-menu-trigger')
+                                ->title(__('tour.choose_school'))
+                                ->description(__('tour.choose_school_desc'))
+                   ),
+            ];
+        }
+        return $setup;
     }
     
     public function createAction(): Action
