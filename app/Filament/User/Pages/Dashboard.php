@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\Guardian;
 use Filament\Actions\Action;
-use Filament\Actions\StaticAction as ModalAction;
+use Filament\Notifications\Actions\Action as ModalAction;
 use App\Filament\Forms\StudentForm;
 use App\Filament\Forms\GuardianForm;
 use JibayMcs\FilamentTour\Tour\Step;
@@ -75,6 +75,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
         return Action::make('create')
             ->label(__('filament-actions::create.single.label'))
             ->form(StudentForm::make())
+            ->databaseTransaction()
             ->action(function(array $data){
                 $student = Student::create($data);
                 if($student){

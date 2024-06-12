@@ -14,6 +14,17 @@ use function PHPUnit\Framework\isNull;
 
 class RegisterSchool extends RegisterTenant
 {
+    
+    public static function canView(): bool
+    {
+
+        if (auth()->user()->is_admin) {
+            return false;
+        }
+        return parent::canView();
+
+    }
+
     public static function getLabel(): string
     {
         return __('form.register');
