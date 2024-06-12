@@ -10,3 +10,4 @@
 - [x] add tour plugin from filament
 - [ ] create test
 - [ ] when clicking button, disabled other button
+- [ ] compress uploaded file
