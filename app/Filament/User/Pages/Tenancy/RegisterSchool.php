@@ -17,7 +17,7 @@ class RegisterSchool extends RegisterTenant
     {
 
         if (auth()->user()->is_admin) {
-            return false;
+            return true;
         }
         return parent::canView();
 
