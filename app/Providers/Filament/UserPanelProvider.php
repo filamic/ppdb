@@ -31,7 +31,7 @@ class UserPanelProvider extends PanelProvider
             ->login()
             // ->emailVerification()
             // ->passwordReset()
-            ->registration()
+            // ->registration()
             ->colors([
                 'primary' => '#E65C00',
             ])
@@ -71,7 +71,9 @@ class UserPanelProvider extends PanelProvider
             ->tenantMenuItems([
                 'register' => MenuItem::make()->label(__('form.register_at_another_school')),
             ])
-            ->plugins([ FilamentTourPlugin::make()->onlyVisibleOnce(true) ])
+            ->plugins([ 
+                FilamentTourPlugin::make()->onlyVisibleOnce(false) 
+            ])
             ;
     }
 }

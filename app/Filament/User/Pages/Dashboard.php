@@ -2,6 +2,7 @@
  
 namespace App\Filament\User\Pages;
 
+use App\Models\StudentTimeline;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Guardian;
@@ -34,7 +35,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
 
     public function boot(): void 
     {
-        $this->students = Student::with('school')->get();
+        $this->students = Student::with('school')->where('user_id', auth()->id())->get();
         $this->guardians = Guardian::all();
     }
 
@@ -42,29 +43,27 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
         $setup = [];
         if((!auth()->guest()) && auth()->user()->schools->count()){
             $setup = [
-               Tour::make('dashboard')
-                   ->steps(
-                    Step::make()
-                                // ->icon('heroicon-o-user-circle')
-                                // ->iconColor('primary')
-                                ->title(__('tour.welcome'))
-                                ->description(__('tour.welcome_desc')),
-                    Step::make('#create_student')
-                                ->title(__('tour.first_step'))
-                                ->description(__('tour.first_step_desc')),
-                    Step::make('#create_parent')
-                                ->title(__('tour.second_step'))
-                                ->description(__('tour.second_step_desc')),
-                    Step::make('#create_student_file')
-                                ->title(__('tour.third_step'))
-                                ->description(__('tour.third_step_desc')),
-                            Step::make('#last_step')
-                                ->title(__('tour.last_step'))
-                                ->description(__('tour.last_step_desc')),
-                            Step::make('.fi-tenant-menu-trigger')
-                                ->title(__('tour.choose_school'))
-                                ->description(__('tour.choose_school_desc'))
-                   ),
+            //    Tour::make('dashboard')
+            //        ->steps(
+            //         Step::make()
+            //                     ->title(__('tour.welcome'))
+            //                     ->description(__('tour.welcome_desc')),
+            //         Step::make('#create_student')
+            //                     ->title(__('tour.first_step'))
+            //                     ->description(__('tour.first_step_desc')),
+            //         Step::make('#create_parent')
+            //                     ->title(__('tour.second_step'))
+            //                     ->description(__('tour.second_step_desc')),
+            //         Step::make('#create_student_file')
+            //                     ->title(__('tour.third_step'))
+            //                     ->description(__('tour.third_step_desc')),
+            //                 Step::make('#last_step')
+            //                     ->title(__('tour.last_step'))
+            //                     ->description(__('tour.last_step_desc')),
+            //                 Step::make('.fi-tenant-menu-trigger')
+            //                     ->title(__('tour.choose_school'))
+            //                     ->description(__('tour.choose_school_desc'))
+            //        ),
             ];
         }
         return $setup;
@@ -78,6 +77,11 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
             ->databaseTransaction()
             ->action(function(array $data){
                 $student = Student::create($data);
+                StudentTimeline::create([
+                    'user_id' => auth()->id(),
+                    'student_id' => $student->id,
+                    'verification_status' => 1,
+                ]);
                 if($student){
                     // Sending success notification
                     Notification::make()

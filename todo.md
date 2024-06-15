@@ -5,9 +5,10 @@
 - [x] add languange switch plugin
 - [x] onboarding page to setup, school name
 - [x] add student confidential health information
-- [ ] lakukan test dengan script ini ``` $user->schools()->attach(Filament::getTenant()); ``` script iniada di userObserver
+- [ ] do test with this script ``` $user->schools()->attach(Filament::getTenant()); ``` at userObserver
 - [ ] prevent user from register in more than one school in the same school year
 - [x] add tour plugin from filament
 - [ ] create test
 - [x] when clicking button, disabled other button
 - [ ] compress uploaded file
+- [ ] export student, with their guardian in operator dashboard page

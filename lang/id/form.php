@@ -29,6 +29,7 @@ return [
     'previous_school_name' => 'Nama Sekolah Sebelumnya',
     'previous_school_city_name' => 'Kota',
     'previous_school_country_name' => 'Negara',
+    'verification_status' => 'Status Verifikasi',
 
     'student_identity' => 'Identitas Anak Didik',
     'student_previous_school_identity' => 'Identitas Sekolah Sebelumnya',

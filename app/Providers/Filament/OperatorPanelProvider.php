@@ -21,6 +21,7 @@ use App\Filament\Operator\Pages\Tenancy\EditSchoolProfile;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use SolutionForest\FilamentSimpleLightBox\SimpleLightBoxPlugin;
 
 class OperatorPanelProvider extends PanelProvider
 {
@@ -37,7 +38,7 @@ class OperatorPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Operator/Resources'), for: 'App\\Filament\\Operator\\Resources')
             ->discoverPages(in: app_path('Filament/Operator/Pages'), for: 'App\\Filament\\Operator\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                // Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Operator/Widgets'), for: 'App\\Filament\\Operator\\Widgets')
             ->widgets([
@@ -66,9 +67,12 @@ class OperatorPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('logo_filamic.svg'))
             ->spa()
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('3s')
             ->tenant(School::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterSchool::class)
             ->tenantProfile(EditSchoolProfile::class)
+            ->plugin(SimpleLightBoxPlugin::make())
             ;
     }
 }
