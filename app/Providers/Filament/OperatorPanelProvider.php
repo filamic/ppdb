@@ -67,6 +67,8 @@ class OperatorPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('logo_filamic.svg'))
             ->spa()
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('3s')
             ->tenant(School::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterSchool::class)
             ->tenantProfile(EditSchoolProfile::class)
