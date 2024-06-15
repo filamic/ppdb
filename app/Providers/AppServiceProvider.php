@@ -2,11 +2,8 @@
 
 namespace App\Providers;
 
-use Filament\View\PanelsRenderHook;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Filament\Support\Facades\FilamentView;
 use Filament\Support\View\Components\Modal;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 
@@ -30,9 +27,5 @@ class AppServiceProvider extends ServiceProvider
             $switch->locales(['id','en']); // also accepts a closure
         });
         Modal::closedByClickingAway(false);
-        // FilamentView::registerRenderHook(
-        //     PanelsRenderHook::USER_MENU_BEFORE ,
-        //     fn (): View => view('filament.hook.tour-button'),
-        // );
     }
 }

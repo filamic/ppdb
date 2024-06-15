@@ -2,72 +2,66 @@
  
 namespace App\Filament\User\Pages;
 
-use App\Models\StudentTimeline;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Guardian;
 use Filament\Actions\Action;
-use Filament\Notifications\Actions\Action as ModalAction;
+use App\Models\StudentTimeline;
 use App\Filament\Forms\StudentForm;
 use App\Filament\Forms\GuardianForm;
-use JibayMcs\FilamentTour\Tour\Step;
-use JibayMcs\FilamentTour\Tour\Tour;
 use Filament\Forms\Contracts\HasForms;
-use JibayMcs\FilamentTour\Tour\HasTour;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\FileUpload;
 use Filament\Actions\Contracts\HasActions;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Notifications\Actions\Action as ModalAction;
 
 class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasActions
 {
     use InteractsWithActions;
     use InteractsWithForms;
-    use HasTour;
-
     protected static string $view = 'filament.user.pages.dashboard';
 
     public ?Collection $students;
     public ?Collection $guardians;
-    public ?Collection $activeModel;
-
     public function boot(): void 
     {
         $this->students = Student::with('school')->where('user_id', auth()->id())->get();
         $this->guardians = Guardian::all();
     }
 
-    public function tours(): array {
-        $setup = [];
-        if((!auth()->guest()) && auth()->user()->schools->count()){
-            $setup = [
-            //    Tour::make('dashboard')
-            //        ->steps(
-            //         Step::make()
-            //                     ->title(__('tour.welcome'))
-            //                     ->description(__('tour.welcome_desc')),
-            //         Step::make('#create_student')
-            //                     ->title(__('tour.first_step'))
-            //                     ->description(__('tour.first_step_desc')),
-            //         Step::make('#create_parent')
-            //                     ->title(__('tour.second_step'))
-            //                     ->description(__('tour.second_step_desc')),
-            //         Step::make('#create_student_file')
-            //                     ->title(__('tour.third_step'))
-            //                     ->description(__('tour.third_step_desc')),
-            //                 Step::make('#last_step')
-            //                     ->title(__('tour.last_step'))
-            //                     ->description(__('tour.last_step_desc')),
-            //                 Step::make('.fi-tenant-menu-trigger')
-            //                     ->title(__('tour.choose_school'))
-            //                     ->description(__('tour.choose_school_desc'))
-            //        ),
-            ];
-        }
-        return $setup;
-    }
+
+    // public function tours(): array {
+    //     $setup = [];
+    //     if((!auth()->guest()) && auth()->user()->schools->count()){
+    //         $setup = [
+    //            Tour::make('dashboard')
+    //                ->steps(
+    //                 Step::make('')
+    //                     ->title(__('tour.welcome'))
+    //                     ->description(__('tour.welcome_desc')),
+    //                 // Step::make('#create_student')
+    //                 //             ->title(__('tour.first_step'))
+    //                 //             ->description(__('tour.first_step_desc')),
+    //                 // Step::make('#create_parent')
+    //                 //             ->title(__('tour.second_step'))
+    //                 //             ->description(__('tour.second_step_desc')),
+    //                 // Step::make('#create_student_file')
+    //                 //             ->title(__('tour.third_step'))
+    //                 //             ->description(__('tour.third_step_desc')),
+    //                 //         Step::make('#last_step')
+    //                 //             ->title(__('tour.last_step'))
+    //                 //             ->description(__('tour.last_step_desc')),
+    //                 //         Step::make('.fi-tenant-menu-trigger')
+    //                 //             ->title(__('tour.choose_school'))
+    //                 //             ->description(__('tour.choose_school_desc'))
+    //                ),
+    //         ];
+    //     }
+    //     return $setup;
+    // }
     
     public function createAction(): Action
     {

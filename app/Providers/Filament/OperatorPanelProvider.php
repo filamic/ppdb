@@ -2,17 +2,14 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Pages;
 use Filament\Panel;
 use App\Models\School;
 use Filament\PanelProvider;
 use App\Http\Middleware\CheckIfUser;
-use App\Http\Middleware\ApplyTenantScopes;
 use Filament\Http\Middleware\Authenticate;
-use App\Filament\Operator\Pages\Auth\Register;
-use App\Filament\Pages\Tenancy\RegisterSchool;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use App\Filament\User\Pages\Tenancy\RegisterSchool;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -72,7 +69,9 @@ class OperatorPanelProvider extends PanelProvider
             ->tenant(School::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterSchool::class)
             ->tenantProfile(EditSchoolProfile::class)
-            ->plugin(SimpleLightBoxPlugin::make())
+            ->plugins([
+                SimpleLightBoxPlugin::make()
+            ])
             ;
     }
 }

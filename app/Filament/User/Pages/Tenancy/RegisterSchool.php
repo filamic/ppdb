@@ -10,8 +10,6 @@ use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\Select;
 use Filament\Pages\Tenancy\RegisterTenant;
 
-use function PHPUnit\Framework\isNull;
-
 class RegisterSchool extends RegisterTenant
 {
     

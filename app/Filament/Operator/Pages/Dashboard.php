@@ -2,9 +2,7 @@
  
 namespace App\Filament\Operator\Pages;
 
-use App\Filament\Exports\StudentExporter;
 use App\Models\Student;
-use Livewire\Component;
 use Filament\Tables\Table;
 use App\Models\GuardianType;
 use Filament\Facades\Filament;
@@ -13,14 +11,12 @@ use App\Models\VerificationStatus;
 use App\traits\generateAnnualStudy;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
+use App\Filament\Exports\StudentExporter;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Contracts\Support\Htmlable;

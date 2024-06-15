@@ -8,7 +8,6 @@ use Filament\PanelProvider;
 use Filament\Navigation\MenuItem;
 use App\Http\Middleware\CheckIfAdmin;
 use Filament\Http\Middleware\Authenticate;
-use JibayMcs\FilamentTour\FilamentTourPlugin;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use App\Filament\User\Pages\Tenancy\RegisterSchool;
@@ -70,9 +69,6 @@ class UserPanelProvider extends PanelProvider
             ->tenantRegistration(RegisterSchool::class)
             ->tenantMenuItems([
                 'register' => MenuItem::make()->label(__('form.register_at_another_school')),
-            ])
-            ->plugins([ 
-                FilamentTourPlugin::make()->onlyVisibleOnce(false) 
             ])
             ;
     }
