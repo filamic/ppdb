@@ -42,7 +42,7 @@ class RegisterSchool extends RegisterTenant
                 ->required()
         ]);
     }
- 
+
     protected function handleRegistration(array $data): School
     {
         $school = School::find($data['school_id']);

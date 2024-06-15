@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ScopedBy([MyStudentScope::class])]
 #[ObservedBy([StudentObserver::class])]
@@ -53,7 +53,21 @@ class Student extends Model
         return $this->belongsToMany(Guardian::class,StudentGuardian::class);
     }
 
+    public function activities(): HasMany
+    {
+        return $this->hasMany(StudentTimeline::class);
+    }
+
+    public function lastActivity(): HasMany
+    {
+        return $this->activities()->latest()->limit(1);
+    }
+
     public function school(): BelongsTo    {
         return $this->belongsTo(School::class);
+    }
+
+    public function user(): BelongsTo    {
+        return $this->belongsTo(User::class);
     }
 }

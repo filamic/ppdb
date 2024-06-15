@@ -8,6 +8,7 @@ use Filament\Forms\Get;
 use App\Models\Religion;
 use Filament\Facades\Filament;
 use Illuminate\Support\HtmlString;
+use App\traits\generateAnnualStudy;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
@@ -22,6 +23,8 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Wizard\Step;
 
 class StudentForm {
+
+    use generateAnnualStudy;
 
     public static function make() : array 
     {
@@ -122,6 +125,8 @@ class StudentForm {
                             ->image()
                             ->required()
                             ->maxSize(1024)
+                            ->visibility('private')
+                            // ->disk('local')
                             ->downloadable(),
                         Placeholder::make('school_statement')
                             ->label(__('form.statement'))
@@ -141,14 +146,5 @@ class StudentForm {
                 
             ])->skippable()
         ];
-    }
-
-    private static function generateAnnualStudy() :array
-    {
-        $annualStudyMaster = [];
-        for ($i=date('Y')-1; $i < date('Y')+10; $i++) { 
-            $annualStudyMaster[$i.'/'.$i+1] = $i.'/'.$i+1;
-        }
-        return $annualStudyMaster;
     }
 }
