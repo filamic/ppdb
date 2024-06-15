@@ -20,8 +20,8 @@ class Guardian extends Model
      */
     public function getGuardianTypeNameAttribute()
     {
-        return 'as';
-        // return GuardianType::find($this->guardian_type)->name;
+        // return 'as';
+        return GuardianType::find($this->guardian_type)->name;
     }
 
     public function students(): BelongsToMany

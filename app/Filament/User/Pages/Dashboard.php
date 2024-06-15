@@ -28,7 +28,7 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     public ?Collection $guardians;
     public function boot(): void 
     {
-        $this->students = Student::with('school')->where('user_id', auth()->id())->get();
+        $this->students = Student::with('school','lastActivity')->where('user_id', auth()->id())->get();
         $this->guardians = Guardian::all();
     }
 
@@ -98,9 +98,10 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         return Action::make('delete')
             ->requiresConfirmation()
-            ->iconButton()
+            // ->iconButton()
             ->icon('heroicon-m-trash')
-            ->size('sm')
+            ->size('xs')
+            ->label(__('filament-actions::delete.single.label'))
             ->color('danger')
             ->tooltip(__('filament-actions::delete.single.label'))
             ->action(function(array $arguments){
@@ -121,8 +122,9 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         return Action::make('edit')
             ->icon('heroicon-m-pencil')
-            ->iconButton()
-            ->size('sm')
+            // ->iconButton()
+            ->size('xs')
+            ->label(__('filament-actions::edit.single.label'))
             ->color('gray')
             ->tooltip(__('filament-actions::edit.single.label'))
             // ->steps($this->generateForm())
@@ -170,10 +172,11 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     {
         return Action::make('guardianDelete')
             ->requiresConfirmation()
-            ->iconButton()
+            // ->iconButton()
             ->icon('heroicon-m-trash')
-            ->size('sm')
+            ->size('xs')
             ->color('danger')
+            ->label(__('filament-actions::delete.single.label'))
             ->tooltip(__('filament-actions::delete.single.label'))
             ->action(function(array $arguments){
                 $delete = Guardian::find($arguments['guardian']);
@@ -193,10 +196,11 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasAction
     public function guardianEditAction(): Action
     {
         return Action::make('guardianEdit')
-            ->iconButton()
+            // ->iconButton()
             ->icon('heroicon-m-pencil')
-            ->size('sm')
+            ->size('xs')
             ->color('gray')
+            ->label(__('filament-actions::edit.single.label'))
             ->tooltip(__('filament-actions::edit.single.label'))
             ->form(GuardianForm::make())
             ->fillForm(function(array $arguments){

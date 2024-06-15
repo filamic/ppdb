@@ -149,8 +149,8 @@
         @if($students->count())
             <div class="w-full grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-2 sm:mt-0"  x-show="activeContent === 1">
                 @foreach ($students as $student)
-                    <div wire:key="{{$student->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 w-full" >
-                        <img class="block h-24 rounded-full sm:shrink-1 mx-auto" src="{{$student->sex_img}}" alt="{{$student->name}}" />
+                    <div wire:key="{{$student->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex items-center sm:items-start sm:space-y-0 w-full" >
+                        <img class="block h-24 rounded-full mx-auto sm:mx-0" src="{{$student->sex_img}}" alt="{{$student->name}}" />
                         <div class="text-center space-y-2 sm:text-left">
                             <div class="space-y-0.5">
                                 <p class="text-md text-gray-700 font-semibold dark:text-gray-200">
@@ -160,15 +160,17 @@
                                     {{$student->school->name}}
                                 </p>
                             </div>
+                            
                             <x-filament::badge size="xs"
-                                icon="heroicon-m-arrow-path"
+                                icon="{{App\Models\VerificationStatus::find($student->lastActivity->first()->verification_status)->icon}}"
+                                color="{{App\Models\VerificationStatus::find($student->lastActivity->first()->verification_status)->color}}"
                                 class="inline-flex items-center rounded-md bg-gray-50 px-2 p-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                Proses Verifikasi
+                                {{App\Models\VerificationStatus::find($student->lastActivity->first()->verification_status)->name}}
                             </x-filament::badge>
-                        </div>
-                        <div class="grow flex justify-center sm:justify-end gap-4">
-                            {{ ($this->editAction)(['student' => $student->id]) }}
-                            {{ ($this->deleteAction)(['student' => $student->id]) }}
+                            <div class="grow flex justify-center sm:justify-start gap-4">
+                                {{ ($this->editAction)(['student' => $student->id]) }}
+                                {{ ($this->deleteAction)(['student' => $student->id]) }}
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -178,7 +180,7 @@
         @if($guardians->count())
             <div class="w-full grid justify-between items-center mt-4 gap-2 grid-cols-2 sm:grid-cols-3 sm:mt-0" x-show="activeContent === 2">
                 @foreach ($guardians as $guardian)
-                    <div wire:key="{{$guardian->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 w-full" >
+                    <div wire:key="{{$guardian->id}}" class="py-8 px-6 max-w-sm mx-auto rounded-xl space-y-2 sm:py-4 sm:flex items-center sm:items-start sm:space-y-0 w-full" >
                         <div class="text-center space-y-2 sm:text-left">
                             <div class="space-y-0.5">
                                 <p class="text-md text-gray-700 font-semibold dark:text-gray-200">
@@ -193,10 +195,10 @@
                                 class="inline-flex items-center rounded-md bg-gray-50 px-2 p-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                                 {{$guardian->guardian_type_name}}
                             </x-filament::badge>
-                        </div>
-                        <div class="grow flex justify-center sm:justify-end gap-4">
-                            {{ ($this->guardianEditAction)(['guardian' => $guardian->id]) }}
-                            {{ ($this->guardianDeleteAction)(['guardian' => $guardian->id]) }}
+                            <div class="grow flex justify-center sm:justify-start gap-4">
+                                {{ ($this->guardianEditAction)(['guardian' => $guardian->id]) }}
+                                {{ ($this->guardianDeleteAction)(['guardian' => $guardian->id]) }}
+                            </div>
                         </div>
                     </div>
                 @endforeach

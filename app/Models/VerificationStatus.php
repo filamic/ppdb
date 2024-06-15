@@ -11,37 +11,37 @@ class VerificationStatus extends Model
         [
             'id' => 1,
             'name' => 'Menunggu Verifikasi',
-            'icon' => 'Menunggu heroicon-m-',
+            'icon' => 'heroicon-m-arrow-path',
             'color' => 'warning',
         ],
         [
             'id' => 2,
             'name' => 'Datang untuk Tes Lisan dan Tertulis',
-            'icon' => 'Datang untuk Tes Lisan dan heroicon-m-',
+            'icon' => 'heroicon-m-computer-desktop',
             'color' => 'info',
         ],
         [
             'id' => 3,
             'name' => 'Penyerahan Berkas ke Sekolah',
-            'icon' => 'Penyerahan Berkas ke heroicon-m-',
+            'icon' => 'heroicon-m-clipboard-document-list',
             'color' => 'info',
         ],
         [
             'id' => 4,
             'name' => 'Selesai (Diterima)',
-            'icon' => 'Selesai (Diterimaheroicon-m-',
+            'icon' => 'heroicon-m-check-badge',
             'color' => 'success',
         ],
         [
             'id' => 5,
             'name' => 'Berkas Kurang',
-            'icon' => 'Berkas heroicon-m-',
+            'icon' => 'heroicon-m-exclamation-circle',
             'color' => 'warning',
         ],
         [
             'id' => 6,
             'name' => 'Ditolak',
-            'icon' => 'heroicon-m-',
+            'icon' => 'heroicon-m-x-circle',
             'color' => 'gray',
         ],
     ];
