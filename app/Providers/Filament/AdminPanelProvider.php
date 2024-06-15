@@ -3,14 +3,10 @@
 namespace App\Providers\Filament;
 
 use Filament\Panel;
-use App\Models\School;
 use Filament\PanelProvider;
-use App\Http\Middleware\ApplyTenantScopes;
 use Filament\Http\Middleware\Authenticate;
-use App\Filament\Pages\Tenancy\RegisterSchool;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use App\Filament\Pages\Tenancy\EditSchoolProfile;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -60,9 +56,6 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->brandLogo(asset('logo_filamic.svg'))
             ->spa()
-            ->tenant(School::class, slugAttribute: 'slug', ownershipRelationship: 'schools')
-            ->tenantRegistration(RegisterSchool::class)
-            ->tenantProfile(EditSchoolProfile::class)
             // ->unsavedChangesAlerts()
             // ->maxContentWidth(MaxWidth::FitContent);
             ;

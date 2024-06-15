@@ -1,1 +1,0 @@
-<button x-on:click="Livewire.dispatch('filament-tour::open-tour', 'dashboard')">Show Dashboard tour</button>
