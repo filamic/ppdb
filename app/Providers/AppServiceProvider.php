@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         // ]);
         FilamentAsset::register([
             Js::make('fslightbox', __DIR__ . '/../../resources/js/fslightbox.js'),
+            Js::make('collapse- sidebar-by-default-on-mobile', __DIR__ . '/../../resources/js/collapseSidebarByDefaultOnMobile.js'),
         ]);
     }
 }
