@@ -71,7 +71,7 @@ class UserPanelProvider extends PanelProvider
             ->tenantMenuItems([
                 'register' => MenuItem::make()->label(__('form.register_at_another_school')),
             ])
-            ->plugins([ FilamentTourPlugin::make()->onlyVisibleOnce(false) ])
+            ->plugins([ FilamentTourPlugin::make()->onlyVisibleOnce(true) ])
             ;
     }
 }
