@@ -9,7 +9,7 @@ use App\Http\Middleware\CheckIfUser;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use App\Filament\User\Pages\Tenancy\RegisterSchool;
+use App\Filament\Operator\Pages\Tenancy\RegisterSchool;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -18,7 +18,6 @@ use App\Filament\Operator\Pages\Tenancy\EditSchoolProfile;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use SolutionForest\FilamentSimpleLightBox\SimpleLightBoxPlugin;
 
 class OperatorPanelProvider extends PanelProvider
 {
