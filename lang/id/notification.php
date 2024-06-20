@@ -20,6 +20,8 @@ return [
     'updated_body' => 'Berhasil mengubah data :name.',
     'deleted' => 'Terhapus',
     'deleted_body' => 'Berhasil menghapus data :name.',
+    'danger' => 'Kesalahan',
+    'danger_body' => ':body.',
     
     'waiting_verification' => ' Menunggu proses verifikasi, dapat dilihat di halaman ini.',
 ];

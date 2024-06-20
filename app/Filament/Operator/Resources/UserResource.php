@@ -5,11 +5,14 @@ namespace App\Filament\Operator\Resources;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
+use App\Models\School;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Facades\Filament;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use App\Filament\Exports\UserExporter;
+use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ExportAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -84,6 +87,41 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('assignSchool')
+                        ->label(__('label.assignSchool'))
+                        ->icon('heroicon-m-building-office')
+                        ->color('primary')
+                        ->form([
+                            Select::make('school_id')
+                                ->options(School::all()->pluck('name','id')->toArray())
+                                ->label(__('form.school'))
+                                ->searchable()
+                                ->multiple()
+                                ->optionsLimit(10)
+                                ->preload()
+                                ->required()
+                        ])
+                        ->action(function(array $data, $livewire){
+                            try {
+                                $operate = $livewire->getSelectedTableRecords()->map(function ($item) use($data) {
+                                    return $item->schools()->syncWithoutDetaching($data['school_id']);
+                                });
+                                Notification::make()
+                                    ->success()
+                                    ->title(__('notification.success'))
+                                    ->body(__('notification.success_body',['name'=>'pada sekolah yang sudah terpilih']))
+                                    ->icon('heroicon-o-check-badge')
+                                    ->send();
+                            } catch (\Throwable $th) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title(__('notification.danger'))
+                                    ->body(__('notification.danger_body',['body'=>$th]))
+                                    ->icon('heroicon-o-x-circle')
+                                    ->send();
+                            }
+                            
+                        })
                 ]),
             ])
             ->headerActions([

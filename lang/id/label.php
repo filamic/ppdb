@@ -37,4 +37,6 @@ return [
     'show_data' => 'Tampilkan Data',
     'profile' => 'Profil',
 
+    'assignSchool' => 'Tambah Akses Cabang',
+
 ];
