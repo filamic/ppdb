@@ -9,9 +9,9 @@
         "bezhansalleh/filament-language-switch": "^3.1",
         "calebporzio/sushi": "^2.5",
         "filament/filament": "^3.2",
+        "jibaymcs/filament-tour": "^3.0",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9",
-        "solution-forest/filament-simplelightbox": "^0.0.7"
+        "laravel/tinker": "^2.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
