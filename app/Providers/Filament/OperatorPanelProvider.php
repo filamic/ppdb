@@ -70,7 +70,7 @@ class OperatorPanelProvider extends PanelProvider
             ->tenantRegistration(RegisterSchool::class)
             ->tenantProfile(EditSchoolProfile::class)
             ->plugins([
-                SimpleLightBoxPlugin::make()
+                // SimpleLightBoxPlugin::make()
             ])
             ;
     }

@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\ImageColumn;
 use App\Filament\Exports\StudentExporter;
+use App\Tables\Columns\ImageFslightbox;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Contracts\Support\Htmlable;
@@ -109,9 +110,9 @@ class Dashboard extends \Filament\Pages\Dashboard implements HasForms, HasTable
             TextColumn::make('previous_school_name')->label(__('form.previous_school_name')),
             TextColumn::make('previous_school_city_name')->label(__('form.previous_school_city_name')),
             TextColumn::make('previous_school_country_name')->label(__('form.previous_school_country_name')),
-            ImageColumn::make('attachment')->label(__('form.certificate_of_birth'))->square()->visibility('private')->simpleLightbox(),
-            ImageColumn::make('user.attachment')->label(__('form.family_card'))->square()->visibility('private')->simpleLightbox(),
-            ImageColumn::make('guardians.attachment')->label(__('form.attachment').' '.__('label.guardian'))->square()->stacked()->wrap()->visibility('private')->simpleLightbox(),
+            ImageFslightbox::make('attachment')->label(__('form.certificate_of_birth'))->square()->visibility('private'),
+            ImageFslightbox::make('user.attachment')->label(__('form.family_card'))->square()->visibility('private'),
+            ImageFslightbox::make('guardians.attachment')->label(__('form.attachment').' '.__('label.guardian'))->square()->stacked()->wrap()->visibility('private')->groupName('guardians-attachment'),
             TextColumn::make('guardians.name')->label(__('label.guardian'))->bulleted(),
             TextColumn::make('guardians')
                 ->formatStateUsing(function(string $state){
